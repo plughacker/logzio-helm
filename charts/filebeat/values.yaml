@@ -121,11 +121,11 @@ daemonset:
   volumes:
     - name: cert
       configMap:
-        defaultMode: 0600
+        defaultMode: 384
         name: logzio-logs-cert
     - name: config
       configMap:
-        defaultMode: 0640
+        defaultMode: 416
         name: filebeat-config
   volumeMounts:
     - name: config
