@@ -131,7 +131,7 @@ filebeatConfig:
 
         - drop_event:
             when:
-              and:
+              or:
                 - contains:
                     kubernetes.namespace: argocd
                 - contains:
