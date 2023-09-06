@@ -133,9 +133,41 @@ filebeatConfig:
                   - equals:
                       kubernetes.namespace: argocd
                   - equals:
+                      kubernetes.namespace: argocd-image-updater
+                  - equals:
                       kubernetes.namespace: argocd-rollouts
                   - equals:
                       kubernetes.namespace: kube-system
+                  - equals:
+                      kubernetes.namespace: default
+                  - equals:
+                      kubernetes.namespace: external-dns
+                  - equals:
+                      kubernetes.namespace: external-secrets
+                  - equals:
+                      kubernetes.namespace: filebeat
+                  - equals:
+                      kubernetes.namespace: flagger-system
+                  - equals:
+                      kubernetes.namespace: flux-system
+                  - equals:
+                      kubernetes.namespace: guestbook
+                  - equals:
+                      kubernetes.namespace: istio-system
+                  - equals:
+                      kubernetes.namespace: kube-node-lease
+                  - equals:
+                      kubernetes.namespace: kube-public
+                  - equals:
+                      kubernetes.namespace: node-problem-detector
+                  - equals:
+                      kubernetes.namespace: test-oki
+                  - equals:
+                      kubernetes.namespace: karpenter
+                  - equals:
+                      kubernetes.namespace: newrelic
+                  - equals:
+                      kubernetes.namespace: ingress-nginx
 
           - drop_event:
               when:
