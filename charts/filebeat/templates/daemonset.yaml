@@ -22,6 +22,7 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriod }}
       hostNetwork: {{ .Values.hostNetwork }}
       dnsPolicy: {{ .Values.dnsPolicy }}
+      priorityClassName: "system-node-critical"
       containers:
       - name: filebeat
         image: "{{ .Values.image }}:{{ .Values.imageTag }}"
