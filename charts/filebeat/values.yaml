@@ -81,93 +81,91 @@ filebeatConfig:
               matchers:
               - logs_path:
                   logs_path: "/var/log/containers/"
+          - add_cloud_metadata: ~
+          - add_docker_metadata: 
+          - rename:
+              fields:
+                - from: agent
+                  to: beat_agent
+              ignore_missing: true
+          - rename:
+              fields:
+                - from: log.file.path
+                  to: source
+              ignore_missing: true
+          - drop_event:
+              when:
+                or:
+                  - contains:
+                      container.name: filebeat
+                  - contains:
+                      container.name: ecs-agent
+          - drop_event:
+              when:
+                or:
+                  - contains:
+                      message: "PID"
+                  - contains:
+                      messsage: "IP 127.0.0.1"
+                  - contains:
+                      message: "ping provider status:200"
+          - drop_event:
+              when:
+                or:
+                  - contains:
+                      message: "ELB-HealthChecker/2.0"
+                  - contains:
+                      message: "/v1/health"
+                  - contains:
+                      message: "healcheck"
+                  - contains:
+                      message: "healthcheck"
+                  - contains:
+                      message: "health check"
+                  - contains:
+                      message: "Healthcheck"
+                  - contains:
+                      message: "Health check"
 
-      processors:
-        - add_cloud_metadata: ~
-        - add_docker_metadata: 
-        - rename:
-            fields:
-              - from: agent
-                to: beat_agent
-            ignore_missing: true
-        - rename:
-            fields:
-              - from: log.file.path
-                to: source
-            ignore_missing: true
-        - drop_event:
-            when:
-              or:
-                - contains:
-                    container.name: filebeat
-                - contains:
-                    container.name: ecs-agent
-        - drop_event:
-            when:
-              or:
-                - contains:
-                    message: "PID"
-                - contains:
-                    messsage: "IP 127.0.0.1"
-                - contains:
-                    message: "ping provider status:200"
-        - drop_event:
-            when:
-              or:
-                - contains:
-                    message: "ELB-HealthChecker/2.0"
-                - contains:
-                    message: "/v1/health"
-                - contains:
-                    message: "healcheck"
-                - contains:
-                    message: "healthcheck"
-                - contains:
-                    message: "health check"
-                - contains:
-                    message: "Healthcheck"
-                - contains:
-                    message: "Health check"
+          - drop_event:
+              when:
+                or:
+                  - contains:
+                      kubernetes.namespace: argocd
+                  - contains:
+                      kubernetes.namespace: argocd-rollouts
+                  - contains:
+                      kubernetes.namespace: kube-system
 
-        - drop_event:
-            when:
-              or:
-                - contains:
-                    kubernetes.namespace: argocd
-                - contains:
-                    kubernetes.namespace: argocd-rollouts
-                - contains:
-                    kubernetes.namespace: kube-system
+          - drop_event:
+              when:
+                and:
+                  - contains:
+                      container.name: ecs-bb-adapter-worker
+                  - or:
+                      - contains:
+                          message: "called method"
+                      - contains:
+                          message: "external request"
+                      - contains:
+                          message: "InstantPaymentConfirmationSQSPort"
+                      - contains:
+                          message: "requeuing"
 
-        - drop_event:
-            when:
-              and:
-                - contains:
-                    container.name: ecs-bb-adapter-worker
-                - or:
-                    - contains:
-                        message: "called method"
-                    - contains:
-                        message: "external request"
-                    - contains:
-                        message: "InstantPaymentConfirmationSQSPort"
-                    - contains:
-                        message: "requeuing"
-
-      fields:
-        logzio_codec: ${LOGZIO_CODEC}
-        token: ${LOGZIO_LOGS_SHIPPING_TOKEN}
-        cluster: ${CLUSTER_NAME}
-        type: ${LOGZIO_TYPE}
+        fields:
+          logzio_codec: ${LOGZIO_CODEC}
+          token: ${LOGZIO_LOGS_SHIPPING_TOKEN}
+          cluster: ${CLUSTER_NAME}
+          type: ${LOGZIO_TYPE}
         
-      fields_under_root: ${FIELDS_UNDER_ROOT}
-      ignore_older: ${IGNORE_OLDER}
-      registry_file: /var/lib/filebeat/registry
-      output:
-        logstash:
-          hosts: ["${LOGZIO_LOGS_LISTENER_HOST}:5015"]
-          ssl:
-            certificate_authorities: ['/etc/pki/tls/certs/SectigoRSADomainValidationSecureServerCA.crt']
+        fields_under_root: ${FIELDS_UNDER_ROOT}
+        ignore_older: ${IGNORE_OLDER}
+        registry_file: /var/lib/filebeat/registry
+        output:
+          logstash:
+            hosts: ["${LOGZIO_LOGS_LISTENER_HOST}:5015"]
+            ssl:
+              certificate_authorities: ['/etc/pki/tls/certs/SectigoRSADomainValidationSecureServerCA.crt']
 
 serviceAccount:
   create: true
