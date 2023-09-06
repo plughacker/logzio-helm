@@ -133,7 +133,7 @@ filebeatConfig:
             when:
               and:
                 - contains:
-                  message: "kubernetes"
+                    message: "kubernetes"
 
         - drop_event:
             when:
