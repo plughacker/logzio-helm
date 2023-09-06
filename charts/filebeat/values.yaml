@@ -152,20 +152,20 @@ filebeatConfig:
                       - contains:
                           message: "requeuing"
 
-        fields:
-          logzio_codec: ${LOGZIO_CODEC}
-          token: ${LOGZIO_LOGS_SHIPPING_TOKEN}
-          cluster: ${CLUSTER_NAME}
-          type: ${LOGZIO_TYPE}
+      fields:
+        logzio_codec: ${LOGZIO_CODEC}
+        token: ${LOGZIO_LOGS_SHIPPING_TOKEN}
+        cluster: ${CLUSTER_NAME}
+        type: ${LOGZIO_TYPE}
         
-        fields_under_root: ${FIELDS_UNDER_ROOT}
-        ignore_older: ${IGNORE_OLDER}
-        registry_file: /var/lib/filebeat/registry
-        output:
-          logstash:
-            hosts: ["${LOGZIO_LOGS_LISTENER_HOST}:5015"]
-            ssl:
-              certificate_authorities: ['/etc/pki/tls/certs/SectigoRSADomainValidationSecureServerCA.crt']
+      fields_under_root: ${FIELDS_UNDER_ROOT}
+      ignore_older: ${IGNORE_OLDER}
+      registry_file: /var/lib/filebeat/registry
+      output:
+        logstash:
+          hosts: ["${LOGZIO_LOGS_LISTENER_HOST}:5015"]
+          ssl:
+            certificate_authorities: ['/etc/pki/tls/certs/SectigoRSADomainValidationSecureServerCA.crt']
 
 serviceAccount:
   create: true
