@@ -133,6 +133,12 @@ filebeatConfig:
             when:
               and:
                 - contains:
+                  message: "*argocd*"
+
+        - drop_event:
+            when:
+              and:
+                - contains:
                     container.name: ecs-bb-adapter-worker
                 - or:
                     - contains:
