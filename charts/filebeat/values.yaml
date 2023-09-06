@@ -133,7 +133,11 @@ filebeatConfig:
             when:
               and:
                 - contains:
-                    message: "kubernetes"
+                    kubernetes.namespace: argocd
+                - contains:
+                    kubernetes.namespace: argocd-rollouts
+                - contains:
+                    kubernetes.namespace: kube-system
 
         - drop_event:
             when:
