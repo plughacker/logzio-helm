@@ -2,6 +2,8 @@ apiVersion: {{ .Values.apiVersions.daemonset }}
 kind: DaemonSet
 metadata:
   name: filebeat
+  annotations:
+    scheduler.alpha.kubernetes.io/nodes-critical: ""
   namespace: {{ template "filebeat.namespace" . }}
   labels:
     k8s-app: filebeat
