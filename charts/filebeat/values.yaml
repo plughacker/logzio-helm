@@ -130,11 +130,11 @@ filebeatConfig:
           - drop_event:
               when:
                 or:
-                  - contains:
+                  - equals:
                       kubernetes.namespace: argocd
-                  - contains:
+                  - equals:
                       kubernetes.namespace: argocd-rollouts
-                  - contains:
+                  - equals:
                       kubernetes.namespace: kube-system
 
           - drop_event:
