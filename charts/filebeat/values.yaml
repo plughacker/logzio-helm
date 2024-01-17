@@ -291,6 +291,13 @@ filebeatConfig:
           #           type: cards-prod
           #       - equals:
           #           SeverityText: TRACE
+          # - drop_event:
+          #   when:
+          #     and:
+          #       - equals:
+          #           type: webhooks-nt-prod
+          #       - equals:
+          #           SeverityText: TRACE
           - drop_event:
               when:
                 or:
