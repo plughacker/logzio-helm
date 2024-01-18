@@ -208,58 +208,58 @@ filebeatConfig:
                           message: "requeuing"
           # Drop BB Worker K8S
           - drop_event:
-            when:
-              and:
-                - contains:
-                    kubernetes.container.name: bb-adapter-worker
-                - or:
-                    - contains:
-                        message: "called method"
-                    - contains:
-                        message: "external request"
-                    - contains:
-                        message: "InstantPaymentConfirmationSQSPort"
-                    - contains:
-                        message: "requeuing"
+              when:
+                and:
+                  - contains:
+                      kubernetes.container.name: bb-adapter-worker
+                  - or:
+                      - contains:
+                          message: "called method"
+                      - contains:
+                          message: "external request"
+                      - contains:
+                          message: "InstantPaymentConfirmationSQSPort"
+                      - contains:
+                          message: "requeuing"
           # Drop Filters Logz.io (Dev)
           # - drop_event:
-          #   when:
-          #     and:
-          #      - equals:
-          #         kubernetes.container.name: transactions-worker-dev
-          #      - or:
-          #          - equals:
-          #             SeverityText: DEBUG
-          #          - equals:
-          #             SeverityText: ERROR
+          #     when:
+          #       and:
+          #       - equals:
+          #           kubernetes.container.name: transactions-worker-dev
+          #        - or:
+          #            - equals:
+          #               SeverityText: DEBUG
+          #            - equals:
+          #               SeverityText: ERROR
           - drop_event:
-            when:
-              and:
-                - equals:
-                    kubernetes.container.name: transactions-dev
-                - equals:
-                    SeverityText: DEBUG
-          - drop_event:
-            when:
-              and:
-                - equals:
-                    kubernetes.container.name: webhooks-nt-dev
-                - or:
-                    - equals:
-                        SeverityText: INFO
-                    - equals:
-                        SeverityText: DEBUG
-          - drop_event:
-            when:
-              or:
-                  # - equals:
-                  #     SeverityText: INFO
-                  # - equals:
-                  #     SeverityText: DEBUG
+              when:
+                and:
                   - equals:
-                      SeverityText: TRACE
-                  # - equals:
-                  #     SeverityText: ERROR
+                      kubernetes.container.name: transactions-dev
+                  - equals:
+                      SeverityText: DEBUG
+          - drop_event:
+              when:
+                and:
+                  - equals:
+                      kubernetes.container.name: webhooks-nt-dev
+                  - or:
+                      - equals:
+                          SeverityText: INFO
+                      - equals:
+                          SeverityText: DEBUG
+          - drop_event:
+              when:
+                or:
+                    # - equals:
+                    #     SeverityText: INFO
+                    # - equals:
+                    #     SeverityText: DEBUG
+                    - equals:
+                        SeverityText: TRACE
+                    # - equals:
+                    #     SeverityText: ERROR
       fields:
         logzio_codec: ${LOGZIO_CODEC}
         token: ${LOGZIO_LOGS_SHIPPING_TOKEN}
