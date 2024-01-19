@@ -264,12 +264,15 @@ filebeatConfig:
           # Agent info
           - drop_fields
               fields: ["agent.ephemeral_id", "agent.hostname", "agent.id", "agent.name", "agent.type", "agent.version"]
+              ignore_missing: true
           # Container info
           - drop_fields
               fields: ["container.id", "container.image.name", "container.runtime", "ecs.version", "input.type"]
+              ignore_missing: true
           # Kubernetes info
           - drop_fields
               fields: ["kubernetes.labels.app_kubernetes_io/instance", "kubernetes.labels.app_kubernetes_io/name", "kubernetes.labels.pod-template-hash", "kubernetes.namespace_labels.kubernetes_io/metadata_name", "kubernetes.namespace_uid", "kubernetes.node.labels.beta_kubernetes_io/arch", "kubernetes.node.labels.beta_kubernetes_io/instance-type", "kubernetes.node.labels.beta_kubernetes_io/os", "kubernetes.node.labels.eks_amazonaws_com/nodegroup-image", "kubernetes.node.labels.eks_amazonaws_com/sourceLaunchTemplateId", "kubernetes.node.labels.eks_amazonaws_com/sourceLaunchTemplateVersion", "kubernetes.node.labels.k8s_io/cloud-provider-aws", "kubernetes.node.labels.kubernetes_io/arch", "kubernetes.node.labels.kubernetes_io/hostname", "kubernetes.node.labels.kubernetes_io/os", "kubernetes.node.labels.node_kubernetes_io/instance-type", "kubernetes.node.labels.role", "kubernetes.node.labels.topology_ebs_csi_aws_com/zone", "kubernetes.node.labels.topology_kubernetes_io/region", "kubernetes.node.labels.topology_kubernetes_io/zone", "kubernetes.node.name", "kubernetes.node.uid", "kubernetes.pod.ip", "kubernetes.pod.uid", "kubernetes.replicaset.name", "log.offset", "logzio-signature", "logzio_codec", "type", "tags", "stream", "source"]
+              ignore_missing: true
       fields:
         logzio_codec: ${LOGZIO_CODEC}
         token: ${LOGZIO_LOGS_SHIPPING_TOKEN}
