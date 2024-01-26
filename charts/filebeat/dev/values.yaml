@@ -249,9 +249,9 @@ filebeatConfig:
                           SeverityText: INFO
                       - equals:
                           SeverityText: DEBUG
-          - drop_event:
-              when:
-                or:
+          # - drop_event:
+              # when:
+                # or:
                     # - equals:
                     #     SeverityText: INFO
                     # - equals:
