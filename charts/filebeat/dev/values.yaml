@@ -256,8 +256,8 @@ filebeatConfig:
                     #     SeverityText: INFO
                     # - equals:
                     #     SeverityText: DEBUG
-                    - equals:
-                        SeverityText: TRACE
+                    # - equals:
+                    #     SeverityText: TRACE
                     # - equals:
                     #     SeverityText: ERROR
           # Unecessary log fields.
