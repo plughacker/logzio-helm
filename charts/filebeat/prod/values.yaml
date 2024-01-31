@@ -208,51 +208,51 @@ filebeatConfig:
                           message: "requeuing"
           # Drop BB Worker K8S
           - drop_event:
-            when:
-              and:
-                - contains:
-                    kubernetes.container.name: bb-adapter-worker
-                - or:
-                    - contains:
-                        message: "called method"
-                    - contains:
-                        message: "external request"
-                    - contains:
-                        message: "InstantPaymentConfirmationSQSPort"
-                    - contains:
-                        message: "requeuing"
+              when:
+                and:
+                  - contains:
+                      kubernetes.container.name: bb-adapter-worker
+                  - or:
+                      - contains:
+                          message: "called method"
+                      - contains:
+                          message: "external request"
+                      - contains:
+                          message: "InstantPaymentConfirmationSQSPort"
+                      - contains:
+                          message: "requeuing"
           # Drop Filters Logzio (Prod)
           - drop_event:
-            when:
-              or:
-                - equals:
-                    Body: 'check: start method'
-                - equals:
-                    Body: 'check: end method'
+              when:
+                or:
+                  - equals:
+                      Body: 'check: start method'
+                  - equals:
+                      Body: 'check: end method'
           # - drop_event:
-          #   when:
-          #     and:
-          #       - equals:
-          #           kubernetes.container.name: tokenization-prod
+          #     when:
+          #       and:
+          #         - equals:
+          #             kubernetes.container.name: tokenization-prod
           #       or:
           #         - equals:
           #             SeverityText: TRACE
           #         - equals:
           #             SeverityText: DEBUG
           # - drop_event:
-          #   when:
-          #     and:
-          #       - equals:
-          #           kubernetes.container.name: cards-prod
-          #       - equals:
-          #           SeverityText: TRACE
+          #     when:
+          #       and:
+          #         - equals:
+          #             kubernetes.container.name: cards-prod
+          #         - equals:
+          #             SeverityText: TRACE
           # - drop_event:
-          #   when:
-          #     and:
-          #       - equals:
-          #           kubernetes.container.name: webhooks-nt-prod
-          #       - equals:
-          #           SeverityText: TRACE
+          #     when:
+          #       and:
+          #         - equals:
+          #             kubernetes.container.name: webhooks-nt-prod
+          #         - equals:
+          #             SeverityText: TRACE
           - drop_event:
               when:
                 or:
@@ -261,12 +261,12 @@ filebeatConfig:
                   - equals:
                       kubernetes.container.name: transactions-router-prod
           - drop_event:
-            when:
-              or:
-                - equals:
-                    message: Provider Not Found Exception
-                - contains:
-                    meessage: 'findProvidersByMerchantIdWithParams() ProviderNotFoundException'
+              when:
+                or:
+                  - equals:
+                      message: Provider Not Found Exception
+                  - contains:
+                      meessage: 'findProvidersByMerchantIdWithParams() ProviderNotFoundException'
           # Unecessary log fields.
           # Container info
           - drop_fields:
