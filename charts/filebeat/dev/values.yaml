@@ -79,14 +79,14 @@ filebeatConfig:
           - script:
               lang: javascript
               id: extract_body_message
-            source: |
-              const regex = /{.*}/;
-              if (ctx.message) {
-                const match = ctx.message.match(regex);
-              if (match) {
-                ctx.body_message = match[0];
+              source: |
+                const regex = /{.*}/;
+                if (ctx.message) {
+                  const match = ctx.message.match(regex);
+                if (match) {
+                  ctx.body_message = match[0];
+                  }
                 }
-              }
           - decode_json_fields:
               fields: ["error_message"]
               target: "extract_body_message"
