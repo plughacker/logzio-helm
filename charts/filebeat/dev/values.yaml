@@ -77,7 +77,6 @@ filebeatConfig:
           - /var/lib/docker/containers/.*/container-cached.log
         json.keys_under_root: true
         json.add_error_key: true
-        json.message_key: "message"
         processors:
           - add_kubernetes_metadata:
               host: ${NODE_NAME}
