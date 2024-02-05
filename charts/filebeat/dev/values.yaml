@@ -78,6 +78,9 @@ filebeatConfig:
         json.keys_under_root: true
         json.add_error_key: true
         processors:
+          - convert:
+              fields:
+                - {from: 'message', type: 'string'}
           - decode_json_fields:
               fields: ['message']
               target: 'json'
