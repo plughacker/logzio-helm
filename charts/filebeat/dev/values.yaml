@@ -75,7 +75,7 @@ filebeatConfig:
           - /var/lib/docker/containers/*/*.log
         exclude_files:
           - /var/lib/docker/containers/.*/container-cached.log
-        json.keys_under_root: true
+        fields_under_root: true
         processors:
           - add_kubernetes_metadata:
               host: ${NODE_NAME}
