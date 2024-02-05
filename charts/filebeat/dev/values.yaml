@@ -83,8 +83,8 @@ filebeatConfig:
                 const regex = /{.*}/;
                 if (ctx.message) {
                   const match = ctx.message.match(regex);
-                if (match) {
-                  ctx.body_message = match[0];
+                  if (match) {
+                    ctx.body_message = match[0];
                   }
                 }
           - decode_json_fields:
