@@ -78,9 +78,9 @@ filebeatConfig:
         json.keys_under_root: true
         processors:
           - decode_json_fields:
-              fields: ["Body"]
-              target: "NewBody"
-              overwrite_keys: true
+              fields: ["message"]
+              target: "NewMessage"
+              overwrite_keys: false
           - add_kubernetes_metadata:
               host: ${NODE_NAME}
               matchers:
