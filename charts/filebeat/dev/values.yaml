@@ -77,10 +77,6 @@ filebeatConfig:
           - /var/lib/docker/containers/.*/container-cached.log
         json.keys_under_root: true
         processors:
-          - decode_json_fields:
-              fields: ["message"]
-              target: "NewMessage"
-              overwrite_keys: false
           - add_kubernetes_metadata:
               host: ${NODE_NAME}
               matchers:
