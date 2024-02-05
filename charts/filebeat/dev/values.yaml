@@ -75,21 +75,11 @@ filebeatConfig:
           - /var/lib/docker/containers/*/*.log
         exclude_files:
           - /var/lib/docker/containers/.*/container-cached.log
+        json.keys_under_root: true
         processors:
-          - script:
-              lang: javascript
-              id: extract_body_message
-              source: |
-                const regex = /{.*}/;
-                if (ctx.message) {
-                  const match = ctx.message.match(regex);
-                  if (match) {
-                    ctx.body_message = match[0];
-                  }
-                }
           - decode_json_fields:
-              fields: ["error_message"]
-              target: "extract_body_message"
+              fields: ["Body"]
+              target: "NewBody"
               overwrite_keys: true
           - add_kubernetes_metadata:
               host: ${NODE_NAME}
