@@ -80,6 +80,8 @@ filebeatConfig:
               fields:
                 - {from: "message", to: "message", type: "string"}
                 - {from: "Timestamp", to: "Timestamp", type: "string"}
+                - {from: "Body", to: "Body", type: "string"}
+                - {from: "Atributes", to: "Atributes", type: "string"}
               ignore_missing: true
           - decode_json_fields:
               fields: ["message"]
