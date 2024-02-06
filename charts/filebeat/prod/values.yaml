@@ -79,6 +79,7 @@ filebeatConfig:
           - convert:
               fields:
                 - {from: "message", to: "message", type: "string"}
+                - {from: "Timestamp", to: "Timestamp", type: "string"}
               ignore_missing: true
           - decode_json_fields:
               fields: ["message"]
