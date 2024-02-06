@@ -69,7 +69,7 @@ filebeatConfig:
   standardConfig:
     filebeat.yml: |-
       filebeat.inputs:
-      - type: container
+      - type: log
         paths:
           - /var/log/containers/*.log
           - /var/lib/docker/containers/*/*.log
