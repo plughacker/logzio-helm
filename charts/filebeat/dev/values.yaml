@@ -1,4 +1,4 @@
-rimage: docker.elastic.co/beats/filebeat
+image: docker.elastic.co/beats/filebeat
 imageTag: 7.13.2
 nameOverride: ""
 namespaceOverride: ""
