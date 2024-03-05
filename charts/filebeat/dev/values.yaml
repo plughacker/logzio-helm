@@ -273,6 +273,9 @@ filebeatConfig:
               tokenizer: "%{container.image.name}:%{container.image.version}"
               field: "container.image.name"
               target_prefix: "ecr"
+          - drop_fields:
+              fields: ["container.image.name"]
+              ignore_missing: true
       fields:
         logzio_codec: ${LOGZIO_CODEC}
         token: ${LOGZIO_LOGS_SHIPPING_TOKEN}
