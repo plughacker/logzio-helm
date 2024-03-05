@@ -272,7 +272,7 @@ filebeatConfig:
           - dissect:
               tokenizer: "%{name}:%{version}"
               field: "container.image.name"
-              target_prefix: "container.image."
+              target_prefix: "container.image"
       fields:
         logzio_codec: ${LOGZIO_CODEC}
         token: ${LOGZIO_LOGS_SHIPPING_TOKEN}
