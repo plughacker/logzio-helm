@@ -96,8 +96,8 @@ filebeatConfig:
           # Drop VTex Unuseful Logs
           - drop_event:
               when:
-                contains:
-                  Attributes.message_str: 'discarding message'
+                equals:
+                  kubernetes.container.name: vtex-adapter-prod
           # Drop ECS Logging Agent
           - drop_event:
               when:
