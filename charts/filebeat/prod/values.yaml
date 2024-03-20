@@ -259,6 +259,13 @@ filebeatConfig:
                   kubernetes.container.name: transactions-router-prod
           - drop_event:
               when:
+                and:
+                  - equals:
+                      kubernetes.container.name: vtex-adapter-prod
+                  - contains:
+                      message: 'discarding message'
+          - drop_event:
+              when:
                 or:
                   - equals:
                       message: Provider Not Found Exception
