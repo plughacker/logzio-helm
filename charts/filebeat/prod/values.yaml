@@ -100,10 +100,10 @@ filebeatConfig:
                   equals:
                     kubernetes.container.name: vtex-adapter-prod
                   or:
-                    contains:
-                      message: '\"Body\":\"discarding message\"'
-                    contains:
-                      message: '"SeverityText":"TRACE"'
+                    - contains:
+                        message: '\"Body\":\"discarding message\"'
+                    - contains:
+                        message: '"SeverityText":"TRACE"'
           # Drop ECS Logging Agent
           - drop_event:
               when:
