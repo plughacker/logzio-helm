@@ -259,11 +259,8 @@ filebeatConfig:
                   kubernetes.container.name: transactions-router-prod
           - drop_event:
               when:
-                and:
-                  - equals:
-                      kubernetes.container.name: vtex-adapter-prod
-                  - equals:
-                      SeverityText: TRACE
+                equals:
+                  SeverityText: TRACE
           - drop_event:
               when:
                 or:
