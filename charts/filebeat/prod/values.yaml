@@ -93,21 +93,6 @@ filebeatConfig:
                 - from: log.file.path
                   to: source
               ignore_missing: true
-          # Drop VTex Unuseful Logs
-          - drop_event:
-              when:
-                and:
-                  equals:
-                    kubernetes.container.name: vtex-adapter-prod
-                  or:
-                    - contains:
-                        message: '''
-                          \"Body\":\"discarding message\"
-                          '''
-                    - contains:
-                        message: '''
-                        "SeverityText":"TRACE"
-                        '''
           # Drop ECS Logging Agent
           - drop_event:
               when:
