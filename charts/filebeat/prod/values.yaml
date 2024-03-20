@@ -263,7 +263,7 @@ filebeatConfig:
                   - equals:
                       kubernetes.container.name: vtex-adapter-prod
                   - contains:
-                      message: 'discarding message'
+                      Body: 'discarding message'
           - drop_event:
               when:
                 or:
