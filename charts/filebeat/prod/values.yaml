@@ -93,6 +93,11 @@ filebeatConfig:
                 - from: log.file.path
                   to: source
               ignore_missing: true
+          # Drop VTex Unuseful Logs
+          - drop_event:
+              when:
+                contains:
+                  Attributes.message_str: 'discarding message'
           # Drop ECS Logging Agent
           - drop_event:
               when:
@@ -253,14 +258,6 @@ filebeatConfig:
           #             kubernetes.container.name: webhooks-nt-prod
           #         - equals:
           #             SeverityText: TRACE
-          - drop_event:
-              when:
-                equals:
-                  kubernetes.container.name: transactions-router-prod
-          - drop_event:
-              when:
-                equals:
-                  SeverityText: TRACE
           - drop_event:
               when:
                 or:
