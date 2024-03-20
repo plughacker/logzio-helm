@@ -262,8 +262,8 @@ filebeatConfig:
                 and:
                   - equals:
                       kubernetes.container.name: vtex-adapter-prod
-                  - contains:
-                      Body: 'discarding message'
+                  - equals:
+                      SeverityText: TRACE
           - drop_event:
               when:
                 or:
