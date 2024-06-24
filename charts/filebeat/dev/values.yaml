@@ -280,17 +280,29 @@ filebeatConfig:
           - script:
               lang: javascript
               source: >
-                var regexCredentials = /credentials\\":{\\"type\\":.*?}/g;
+                var regexCredentials = /(?:\\"credentials\\"):({\\.*?type.*?})|(?:"credentials"):({.*?type.*?})|(?:\\\\"credentials\\\\"):({.*?type.*?})/gi;
                 var regexCreditCard = /\b(?:\d[ -]*?){13,16}\b/g;
-                var regexCVV = /(cvv|cvc|csc|cid|cvn|cve|cvp2)\\"(?:\s?):(?:\s?)\\"(?:\b\d{3,4}\b)/gi;
-                var regexExpirationDate = /(expirationdate|expiration|expdate)\\":\\"(\d{2})\/(\d{4})/gi
+                var regexCvv = /(cvv|cvc|csc|cid|cvn|cve|cvp2).+?(\b\d{3,4}\b)/gi;
+                var regexExpirationDate = /(expirationdate|expiration|expdate)\\":\\"(\d{2})\/(\d{4})/gi;
 
                 function process(event) {
                     var msg = event.Get("message");
-                    msg = msg.replace(regexCreditCard, '*******');
-                    msg = msg.replace(regexCVV, '$1":"****');
-                    msg = msg.replace(regexExpirationDate, "$1\": \"$2/****");
-                    msg = msg.replace(regexCredentials, 'credentials\\\":\\\"...\\\"');
+                    msg = msg.replace(regexCreditCard, 'mask_card');
+                    msg = msg.replace(regexExpirationDate, "$1\": \"$2/mask_date");
+
+                    var matchCvv = regexCvv.exec(msg);
+                    if (matchCvv) {
+                        var maskCvvValue = matchCvv[0].replace(matchCvv[2], 'mask_cvv');
+                        msg = (msg.replace(matchCvv[0], maskCvvValue));
+                    }
+
+                    var matchCredentials = regexCredentials.exec(msg);
+
+                    if (matchCredentials) {
+                        var groups = matchCredentials;
+                        msg = msg.replace(groups[1]||groups[2]||groups[2], 'null');
+                    }
+
                     event.Put("message",msg);
                 }
       fields:
