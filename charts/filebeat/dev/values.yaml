@@ -296,11 +296,13 @@ filebeatConfig:
                         msg = (msg.replace(matchCvv[0], maskCvvValue));
                     }
 
-                    var matchCredentials = regexCredentials.exec(msg);
-
-                    if (matchCredentials) {
+                    while(true) {
+                        var matchCredentials = regexCredentials.exec(msg);
+                        if (!matchCredentials) {
+                            break;
+                        }
                         var groups = matchCredentials;
-                        msg = msg.replace(groups[1]||groups[2]||groups[2], 'null');
+                        msg = msg.replace(groups[1]||groups[2]||groups[3], 'null');
                     }
 
                     event.Put("message",msg);
