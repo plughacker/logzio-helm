@@ -276,6 +276,23 @@ filebeatConfig:
           - drop_fields:
               fields: ["container.image.name"]
               ignore_missing: true
+          # Filter sensitive data
+          - script:
+              lang: javascript
+              source: >
+                var regexCredentials = /credentials\\":{\\"type\\":.*?}/g;
+                var regexCreditCard = /\b(?:\d[ -]*?){13,16}\b/g;
+                var regexCVV = /(cvv|cvc|csc|cid|cvn|cve|cvp2)\\"(?:\s?):(?:\s?)\\"(?:\b\d{3,4}\b)/gi;
+                var regexExpirationDate = /(expirationdate|expiration|expdate)\\":\\"(\d{2})\/(\d{4})/gi
+
+                function process(event) {
+                    var msg = event.Get("message");
+                    msg = msg.replace(regexCreditCard, '*******');
+                    msg = msg.replace(regexCVV, '$1":"****');
+                    msg = msg.replace(regexExpirationDate, "$1\": \"$2/****");
+                    msg = msg.replace(regexCredentials, 'credentials\\\":\\\"...\\\"');
+                    event.Put("message",msg);
+                }
       fields:
         logzio_codec: ${LOGZIO_CODEC}
         token: ${LOGZIO_LOGS_SHIPPING_TOKEN}
