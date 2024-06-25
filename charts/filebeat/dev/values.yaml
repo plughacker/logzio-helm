@@ -296,13 +296,17 @@ filebeatConfig:
                         msg = (msg.replace(matchCvv[0], maskCvvValue));
                     }
 
-                    while(true) {
+                    // 'for' only used to ensure that there will not be an infinite loop
+                    for(var i = 0; i < 99; i ++) {
                         var matchCredentials = regexCredentials.exec(msg);
                         if (!matchCredentials) {
                             break;
                         }
                         var groups = matchCredentials;
-                        msg = msg.replace(groups[1]||groups[2]||groups[3], 'null');
+
+                        // 1986 magic number for debugging in production
+                        // used why number does not need escaping
+                        msg = msg.replace(groups[1]||groups[2]||groups[3], '1986');
                     }
 
                     event.Put("message",msg);
