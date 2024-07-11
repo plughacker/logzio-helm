@@ -347,7 +347,12 @@ daemonset:
     requests:
       cpu: 100m
       memory: 100Mi
-  tolerations: {}
+  tolerations:
+  - key: "core"
+    operator: "Equal"
+    value: "true"
+    #effect: "NoSchedule"
+
   priorityClassName: ""
   volumes:
     - name: cert
